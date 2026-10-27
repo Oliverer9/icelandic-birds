@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Birds of Iceland</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sura:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <h1>Birds of Iceland</h1>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="#search">Search</a></li>
+          <li><a href="#saved">Saved birds</a></li>
+          <li><a href="#signup">Sign up</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1" class="wrap">
+    <section id="search" aria-labelledby="search-heading">
+      <h2 id="search-heading">Search birds</h2>
+      <div class="field search-field">
+        <label for="search-input">Search</label>
+        <input type="search" id="search-input" autocomplete="off" aria-describedby="search-hint">
+        <p id="search-hint" class="hint">Type an English or Icelandic name.</p>
+      </div>
+      <p id="result-count" class="result-count" role="status">Loading birds…</p>
+      <ul id="results" class="results"></ul>
+    </section>
+
+    <section id="saved" aria-labelledby="saved-heading">
+      <h2 id="saved-heading">Saved birds</h2>
+      <p id="saved-empty" class="hint">You haven't saved any birds yet. Use the bookmark button on a bird to save it.</p>
+      <ul id="saved-list" class="saved-list"></ul>
+      <p id="saved-status" class="visually-hidden" role="status"></p>
+    </section>
+
+    <section id="signup" aria-labelledby="signup-heading">
+      <h2 id="signup-heading">Sign up for a bird-watching trip</h2>
+      <p class="hint">All fields are required.</p>
+      <form id="signup-form" novalidate>
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" required aria-describedby="name-error">
+          <p class="error" id="name-error"></p>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="email-error">
+          <p class="error" id="email-error"></p>
+        </div>
+
+        <fieldset class="field">
+          <legend>Trip</legend>
+          <div class="choice">
+            <input type="radio" id="trip-myvatn" name="trip" value="Mývatn" required aria-describedby="trip-error">
+            <label for="trip-myvatn">Mývatn</label>
+          </div>
+          <div class="choice">
+            <input type="radio" id="trip-latrabjarg" name="trip" value="Látrabjarg" aria-describedby="trip-error">
+            <label for="trip-latrabjarg">Látrabjarg</label>
+          </div>
+          <div class="choice">
+            <input type="radio" id="trip-westman" name="trip" value="Westman Islands" aria-describedby="trip-error">
+            <label for="trip-westman">Westman Islands</label>
+          </div>
+          <p class="error" id="trip-error"></p>
+        </fieldset>
+
+        <div class="field">
+          <div class="choice">
+            <input type="checkbox" id="consent" name="consent" required aria-describedby="consent-error">
+            <label for="consent">I agree to be contacted about the trip</label>
+          </div>
+          <p class="error" id="consent-error"></p>
+        </div>
+
+        <button type="submit" class="button">Sign up</button>
+      </form>
+      <p id="signup-success" class="success" role="status" tabindex="-1"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <h2>Photo credits</h2>
+      <ul id="credits" class="credits"></ul>
+    </div>
+  </footer>
+
+  <dialog id="bird-dialog" class="bird-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-top">
+      <button type="button" class="button button-small" id="dialog-close" autofocus>Close</button>
+    </div>
+    <h2 id="dialog-title"></h2>
+    <img id="dialog-image" class="dialog-image" src="" alt="">
+    <dl class="facts">
+      <div><dt>Icelandic name</dt><dd id="dialog-icelandic" lang="is"></dd></div>
+      <div><dt>Size</dt><dd id="dialog-size"></dd></div>
+      <div><dt>Habitat</dt><dd id="dialog-habitat"></dd></div>
+      <div><dt>Season</dt><dd id="dialog-season"></dd></div>
+    </dl>
+    <p id="dialog-description"></p>
+  </dialog>
+</body>
+</html>
