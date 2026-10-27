@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Birds of Iceland</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sura:wght@400;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <p class="site-name"><a href="#main">Birds of Iceland</a></p>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="#search">Search</a></li>
+          <li><a href="#saved">Saved birds</a></li>
+          <li><a href="#signup">Sign up</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="container">
+      <h1>Birds of Iceland</h1>
+      <p class="intro">Find out about the birds you can see in Iceland, save your favourites and sign up for a bird-watching trip.</p>
+
+      <section id="search" class="section" aria-labelledby="search-heading">
+        <h2 id="search-heading">Search</h2>
+        <div class="search-field">
+          <label for="search-input">Search</label>
+          <input id="search-input" type="search" autocomplete="off" aria-describedby="search-hint">
+          <p id="search-hint" class="hint">Type an English or Icelandic name.</p>
+        </div>
+        <p id="result-count" class="result-count" role="status" aria-live="polite"></p>
+        <ul id="results" class="results"></ul>
+      </section>
+
+      <section id="saved" class="section" aria-labelledby="saved-heading">
+        <h2 id="saved-heading" tabindex="-1">Saved birds</h2>
+        <p id="saved-empty" class="hint-dark">You have not saved any birds yet. Use the bookmark button on a bird to save it.</p>
+        <ul id="saved-list" class="saved-list"></ul>
+      </section>
+
+      <section id="signup" class="section" aria-labelledby="signup-heading">
+        <h2 id="signup-heading">Sign up</h2>
+        <p>Sign up for a bird-watching trip. All fields are required.</p>
+
+        <form id="signup-form" class="signup-form" novalidate>
+          <div class="field" data-field="name">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required aria-describedby="name-error">
+            <p id="name-error" class="error" hidden></p>
+          </div>
+
+          <div class="field" data-field="email">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-error">
+            <p id="email-error" class="error" hidden></p>
+          </div>
+
+          <fieldset class="field" data-field="trip" aria-describedby="trip-error">
+            <legend>Trip</legend>
+            <div class="radio">
+              <input id="trip-myvatn" name="trip" type="radio" value="Mývatn" required>
+              <label for="trip-myvatn">Mývatn</label>
+            </div>
+            <div class="radio">
+              <input id="trip-latrabjarg" name="trip" type="radio" value="Látrabjarg">
+              <label for="trip-latrabjarg">Látrabjarg</label>
+            </div>
+            <div class="radio">
+              <input id="trip-westman" name="trip" type="radio" value="the Westman Islands">
+              <label for="trip-westman">Westman Islands</label>
+            </div>
+            <p id="trip-error" class="error" hidden></p>
+          </fieldset>
+
+          <div class="field" data-field="consent">
+            <div class="checkbox">
+              <input id="consent" name="consent" type="checkbox" required aria-describedby="consent-error">
+              <label for="consent">I agree to be contacted about the trip</label>
+            </div>
+            <p id="consent-error" class="error" hidden></p>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Sign up</button>
+        </form>
+
+        <div id="signup-success" class="success" role="status" tabindex="-1" hidden></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <h2>Photo credits</h2>
+      <ul id="credits" class="credits"></ul>
+    </div>
+  </footer>
+
+  <dialog id="bird-dialog" class="bird-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-inner">
+      <div class="dialog-header">
+        <h2 id="dialog-title"></h2>
+        <button type="button" id="dialog-close" class="btn btn-small">Close</button>
+      </div>
+      <img id="dialog-image" class="dialog-image" src="" alt="">
+      <dl class="facts">
+        <div><dt>Icelandic name</dt><dd id="dialog-icelandic" lang="is"></dd></div>
+        <div><dt>Size</dt><dd id="dialog-size"></dd></div>
+        <div><dt>Habitat</dt><dd id="dialog-habitat"></dd></div>
+        <div><dt>Season</dt><dd id="dialog-season"></dd></div>
+      </dl>
+      <p id="dialog-description"></p>
+    </div>
+  </dialog>
+
+  <svg hidden aria-hidden="true">
+    <symbol id="icon-bookmark" viewBox="0 0 24 24">
+      <path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4.5L5 21V4a1 1 0 0 1 1-1z" fill="var(--fill, none)" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+</body>
+</html>
