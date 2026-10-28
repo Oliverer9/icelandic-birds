@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Birds of Iceland: accessibility project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sura:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #00165D;
+      --indigo: #272C8D;
+      --text: #333333;
+      --muted: #6E6E6E;
+      --border: #8C8C8C;
+      --yellow: #FFDB94;
+      --focus: #001EFF;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Sura', Georgia, serif;
+      font-size: 1.25rem;
+      line-height: 1.5;
+      color: var(--text);
+      background: #FFFFFF;
+    }
+    main { max-width: 48rem; margin: 0 auto; padding: 2.5rem 1rem 3rem; }
+    h1, h2 { color: var(--navy); line-height: 1.2; }
+    h1 { font-size: 2rem; margin: 0 0 0.75rem; }
+    h2 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+    p { margin: 0 0 1rem; }
+    .intro { margin-bottom: 2rem; }
+    .task {
+      background: var(--yellow);
+      color: var(--navy);
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+    }
+    ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+    li {
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+    }
+    li p { margin: 0; font-size: 1rem; color: var(--muted); }
+    a { color: var(--navy); text-underline-offset: 0.2em; }
+    a:hover { color: var(--indigo); }
+    h2 a { display: inline-block; min-height: 44px; padding: 0.25rem 0; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 2px; }
+    footer { font-size: 1rem; color: var(--muted); margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Birds of Iceland: accessibility project</h1>
+    <div class="intro">
+      <p>The same one-page website about Icelandic birds, built twice by an AI agent from the same prompt: once on its own, and once with an accessibility skill. Both were tested with automated tests, a keyboard, a screen reader and zoom.</p>
+      <p class="task"><strong>Main task:</strong> Search for Whimbrel, open it, save it and sign up.</p>
+    </div>
+    <ul>
+      <li>
+        <h2><a href="a/">Project A: AI without the skill</a></h2>
+        <p>Built from the prompt alone and not changed by hand.</p>
+      </li>
+      <li>
+        <h2><a href="b/">Project B: AI with the accessibility skill</a></h2>
+        <p>Built from the same prompt, following the skill and spec. Fixed until all tests pass.</p>
+      </li>
+      <li>
+        <h2><a href="report/">Report</a></h2>
+        <p>Test results for A and B, the agent and div experiment, and what testing by hand found.</p>
+      </li>
+    </ul>
+    <footer>
+      <p>Vefskólinn, module 4: Accessibility. Photo credits are listed at the bottom of Project A and B.</p>
+    </footer>
+  </main>
+</body>
+</html>
