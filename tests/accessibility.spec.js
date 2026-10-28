@@ -121,6 +121,27 @@ test('focus: returns to the result after the dialog closes (Close button and Esc
   await expect(openButton).toBeFocused();
 });
 
+// Found by hand at 400% zoom: scrolling past the end of the dialog scrolled the page behind it,
+// and the dialog then seemed stuck until the page was scrolled back.
+test('zoom: at 400% the page behind the dialog does not scroll while the dialog is open', async ({ page }) => {
+  // 320 x 256 px is what a 1280 x 1024 window looks like at 400% zoom.
+  await page.setViewportSize({ width: 320, height: 256 });
+  await page.getByRole('button', { name: 'Atlantic puffin', exact: true }).click();
+  const dialog = page.getByRole('dialog', { name: 'Atlantic puffin' });
+  await expect(dialog).toBeVisible();
+
+  const pageScrollBefore = await page.evaluate(() => window.scrollY);
+  const box = await dialog.boundingBox();
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  for (let i = 0; i < 15; i++) {
+    await page.mouse.wheel(0, 400);
+    await page.waitForTimeout(50);
+  }
+
+  expect(await dialog.evaluate(el => el.scrollTop), 'the dialog itself should scroll').toBeGreaterThan(0);
+  expect(await page.evaluate(() => window.scrollY), 'the page behind the dialog should not move').toBe(pageScrollBefore);
+});
+
 test('axe: no serious or critical violations (page, open dialog, form errors)', async ({ page }) => {
   const seriousViolations = async () => {
     const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();

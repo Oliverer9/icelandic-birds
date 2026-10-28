@@ -73,4 +73,37 @@ The agent finished the whole task without screenshots, using only the names in t
 
 ## Testing by hand (step 8)
 
-_To be filled in._
+Full checklist and notes: [manual-testing.md](manual-testing.md). Tested Project B without AI, in Firefox.
+
+| Part | Result |
+|---|---|
+| Keyboard only | All 12 steps of the main task worked. Focus was always visible and in a sensible order. |
+| Screen reader (NVDA) | All 11 checks worked and matched spec.md: headings, landmarks, alt text, "1 bird found", "toggle button, pressed", errors and success message were all announced. |
+| 200% zoom | Everything worked: no sideways scrolling, nothing cut off. |
+| 400% zoom | **Problem found** (see below). |
+
+### What the automated tests missed
+
+**At 400% zoom, the page behind the dialog scrolled.** The dialog has to scroll at 400%, which is fine. But when I scrolled past the end of the dialog, the page behind it scrolled instead. Scrolling back up then moved the hidden page first, so the dialog seemed stuck until the page behind was back where it was. None of the 4 tests zoom in or scroll the dialog, so they couldn't catch it.
+
+**New test:** `zoom: at 400% the page behind the dialog does not scroll while the dialog is open`. It makes the window 320 × 256 px (what 1280 × 1024 looks like at 400% zoom), opens a dialog, scrolls a lot inside it, and checks that the page behind didn't move.
+
+- **Before the fix, B failed it:** the page behind moved from 521 px to 4,582 px.
+- **Fix in `b/styles.css`:** `overscroll-behavior: contain` on the dialog, and `html:has(.bird-dialog[open]) { overflow: hidden; }` to lock the page while the dialog is open.
+- **After the fix, B passes all 5 tests.**
+- **A fails the new test too** (same problem). A was not fixed, as the assignment says.
+
+### Results with the new test
+
+| Test | A | B |
+|---|---|---|
+| Keyboard main task | ✘ | ✓ |
+| Visible focus | ✓ | ✓ |
+| Focus return after dialog | ✓ | ✓ |
+| Zoom: page behind dialog doesn't scroll (new) | ✘ | ✓ (after fix) |
+| axe | ✓ | ✓ |
+| **Failures** | **2 of 5** | **0 of 5** |
+
+### Other notes (not page problems)
+- After the last element, Tab goes to the browser's address bar and then back to the skip link. That's normal browser behaviour.
+- NVDA first only said "Birds of Iceland, Mozilla Firefox". Firefox had been started before NVDA was installed, and it worked after restarting Firefox. A setup problem can look like a broken page.

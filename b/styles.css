@@ -333,8 +333,11 @@ legend { padding: 0; margin-bottom: 0.25rem; }
   border: 0;
   border-radius: var(--radius);
   color: var(--text);
+  overscroll-behavior: contain; /* scrolling past the end doesn't scroll the page behind */
 }
 .bird-dialog::backdrop { background: rgba(0, 22, 93, 0.6); }
+/* Lock the page behind while the dialog is open (found by hand at 400% zoom) */
+html:has(.bird-dialog[open]) { overflow: hidden; }
 .dialog-top { display: flex; justify-content: flex-end; margin-bottom: 0.5rem; }
 .dialog-image {
   width: 100%;
